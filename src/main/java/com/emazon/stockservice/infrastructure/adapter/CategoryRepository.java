@@ -1,5 +1,5 @@
 package com.emazon.stockservice.infrastructure.adapter;
-import com.emazon.stockservice.infrastructure.entity.CategoryEntity;
+import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;

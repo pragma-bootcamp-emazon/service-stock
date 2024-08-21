@@ -1,6 +1,6 @@
 package com.emazon.stockservice.infrastructure.exceptionHandler;
 
-import com.emazon.stockservice.infrastructure.exception.CategoryAlreadyExistsException;
+import com.emazon.stockservice.application.exceptions.CategoryAlreadyExistsException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package com.emazon.stockservice.domain.port;
+package com.emazon.stockservice.domain.spi;
 
-import com.emazon.stockservice.domain.model.Category;
+import com.emazon.stockservice.domain.models.Category;
 import java.util.List;
 
 public interface ICategoryPersistencePort {

@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.entity;
+package com.emazon.stockservice.infrastructure.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

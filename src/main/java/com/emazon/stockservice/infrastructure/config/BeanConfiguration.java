@@ -1,9 +1,9 @@
-package com.emazon.stockservice.infrastructure.configuration;
+package com.emazon.stockservice.infrastructure.config;
 
 import com.emazon.stockservice.application.service.CategoryServiceImpl;
 import com.emazon.stockservice.application.service.ICategoryService;
-import com.emazon.stockservice.domain.port.ICategoryPersistencePort;
-import com.emazon.stockservice.infrastructure.Web.output.jpa.mapper.CategoryEntityMapper;
+import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
+import com.emazon.stockservice.infrastructure.web.output.jpa.mapper.CategoryEntityMapper;
 import com.emazon.stockservice.infrastructure.adapter.CategoryRepository;
 
 import com.emazon.stockservice.infrastructure.adapter.persistence.CategoryJpaAdapter;

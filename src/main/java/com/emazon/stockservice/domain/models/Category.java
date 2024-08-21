@@ -1,4 +1,4 @@
-package com.emazon.stockservice.domain.model;
+package com.emazon.stockservice.domain.models;
 
 public class Category {
     private Long id;

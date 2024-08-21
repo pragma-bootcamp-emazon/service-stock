@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.Web.dto;
+package com.emazon.stockservice.infrastructure.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,10 +1,10 @@
 package com.emazon.stockservice.infrastructure.adapter.persistence;
 
-import com.emazon.stockservice.domain.model.Category;
-import com.emazon.stockservice.domain.port.ICategoryPersistencePort;
-import com.emazon.stockservice.infrastructure.Web.output.jpa.mapper.CategoryEntityMapper;
+import com.emazon.stockservice.domain.models.Category;
+import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
+import com.emazon.stockservice.infrastructure.web.output.jpa.mapper.CategoryEntityMapper;
 import com.emazon.stockservice.infrastructure.adapter.CategoryRepository;
-import com.emazon.stockservice.infrastructure.entity.CategoryEntity;
+import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     public Category save(Category category) {
         CategoryEntity categoryEntity = categoryEntityMapper.toEntity(category);
         CategoryEntity savedEntity = categoryRepository.save(categoryEntity);
-        return categoryEntityMapper.toDomain(savedEntity);
+        return  categoryEntityMapper.toDomain(savedEntity);
     }
 
     @Override

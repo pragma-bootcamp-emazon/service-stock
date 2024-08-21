@@ -1,6 +1,6 @@
-package com.emazon.stockservice.infrastructure.Web.output.jpa.mapper;
-import com.emazon.stockservice.domain.model.Category;
-import com.emazon.stockservice.infrastructure.entity.CategoryEntity;
+package com.emazon.stockservice.infrastructure.web.output.jpa.mapper;
+import com.emazon.stockservice.domain.models.Category;
+import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
 
 import org.mapstruct.Mapper;
 
