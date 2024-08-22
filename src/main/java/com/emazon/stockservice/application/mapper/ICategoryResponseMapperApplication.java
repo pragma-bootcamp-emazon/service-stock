@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.web.output.jpa.mapper;
+package com.emazon.stockservice.application.mapper;
 
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.application.dto.CategoryResponse;
@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface ICategoryResponseMapper {
+public interface ICategoryResponseMapperApplication {
 
     CategoryResponse toCategoryResponse(Category category);
 

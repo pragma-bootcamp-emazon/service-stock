@@ -1,7 +1,8 @@
 package com.emazon.stockservice.application.service;
 
-import com.emazon.stockservice.domain.models.Category;
+import com.emazon.stockservice.application.dto.CategoryRequest;
+import com.emazon.stockservice.application.dto.CategoryResponse;
 
 public interface ICategoryService {
-    Category createCategory(Category category);
+    CategoryResponse createCategory(CategoryRequest categoryRequest);
 }

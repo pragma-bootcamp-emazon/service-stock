@@ -1,5 +1,7 @@
 package com.emazon.stockservice.infrastructure.config;
 
+import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
+import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
 import com.emazon.stockservice.application.service.CategoryServiceImpl;
 import com.emazon.stockservice.application.service.ICategoryService;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
@@ -19,7 +21,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ICategoryService categoryService(ICategoryPersistencePort categoryPersistencePort) {
-        return new CategoryServiceImpl(categoryPersistencePort);
+    public ICategoryService categoryService(ICategoryPersistencePort categoryPersistencePort, ICategoryRequestMapper categoryRequestMapper, ICategoryResponseMapperApplication categoryResponseMapper) {
+        return new CategoryServiceImpl(categoryPersistencePort, categoryRequestMapper, categoryResponseMapper);
     }
 }
