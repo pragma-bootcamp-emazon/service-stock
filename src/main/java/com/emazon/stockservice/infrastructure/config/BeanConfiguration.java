@@ -4,10 +4,10 @@ import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
 import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
 import com.emazon.stockservice.application.service.CategoryServiceImpl;
 import com.emazon.stockservice.application.service.ICategoryService;
+import com.emazon.stockservice.application.usecase.ICreateCategoryUseCase;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import com.emazon.stockservice.infrastructure.web.output.jpa.mapper.CategoryEntityMapper;
 import com.emazon.stockservice.infrastructure.adapter.CategoryRepository;
-
 import com.emazon.stockservice.infrastructure.adapter.persistence.CategoryJpaAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ICategoryService categoryService(ICategoryPersistencePort categoryPersistencePort, ICategoryRequestMapper categoryRequestMapper, ICategoryResponseMapperApplication categoryResponseMapper) {
-        return new CategoryServiceImpl(categoryPersistencePort, categoryRequestMapper, categoryResponseMapper);
+    public ICategoryService categoryService(ICreateCategoryUseCase createCategoryUseCase, ICategoryRequestMapper categoryRequestMapper, ICategoryResponseMapperApplication categoryResponseMapper) {
+        return new CategoryServiceImpl(createCategoryUseCase, categoryRequestMapper, categoryResponseMapper);
     }
 }

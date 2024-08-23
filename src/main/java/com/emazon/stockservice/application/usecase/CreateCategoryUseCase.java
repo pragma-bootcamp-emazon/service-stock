@@ -1,28 +1,28 @@
 package com.emazon.stockservice.application.usecase;
 
+import com.emazon.stockservice.application.exceptions.CategoryAlreadyExistsException;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
-import com.emazon.stockservice.application.exceptions.CategoryAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @RequiredArgsConstructor
-public class CreateCategoryUseCaseImpl implements ICreateCategoryUseCase {
+public class CreateCategoryUseCase implements ICreateCategoryUseCase {
 
     private final ICategoryPersistencePort categoryPersistencePort;
 
     @Override
     public Category execute(String name, String description) {
+        // Verificar si la categoría ya existe
         if (categoryPersistencePort.existsByName(name)) {
             throw new CategoryAlreadyExistsException("Category name already exists");
         }
 
-        Category category = new Category();
-        category.setName(name);
-        category.setDescription(description);
+        // Crear la entidad de dominio
+        Category category = new Category(name, description);
 
+        // Guardar la entidad de dominio en el puerto de persistencia
         return categoryPersistencePort.save(category);
     }
 }
