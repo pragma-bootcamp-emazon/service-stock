@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.dto;
+package com.emazon.stockservice.application.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

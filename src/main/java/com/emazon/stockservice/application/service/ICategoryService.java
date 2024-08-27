@@ -1,7 +1,7 @@
 package com.emazon.stockservice.application.service;
 
-import com.emazon.stockservice.application.dto.CategoryRequest;
-import com.emazon.stockservice.application.dto.CategoryResponse;
+import com.emazon.stockservice.application.dto.category.CategoryRequest;
+import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
