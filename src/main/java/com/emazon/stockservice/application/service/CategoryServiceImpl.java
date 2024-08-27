@@ -37,25 +37,22 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Page<CategoryResponse> getAllCategories(Pageable pageable, Sort.Direction sortDirection, String sortBy) {
-        // Determinar el campo de ordenación
+
         String sortField = (sortBy == null || sortBy.isEmpty()) ? "name" : sortBy;
         Pageable pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(sortDirection, sortField));
 
-        // Llamada al caso de uso para obtener categorías paginadas
+
         List<Category> categories = retrieveCategories.execute(
                 new Pagination(pageRequest.getPageNumber(), pageRequest.getPageSize()),
                 new SortOrder(sortField, SortOrder.Direction.valueOf(sortDirection.name()))
         );
 
-        // Obtener el número total de elementos en la base de datos
-        long totalElements = retrieveCategories.countTotalCategories(); // Debes implementar este método
+        long totalElements = retrieveCategories.countTotalCategories();
 
-        // Convertir la lista de categorías a DTOs
         List<CategoryResponse> responseList = categories.stream()
                 .map(categoryResponseMapper::toCategoryResponse)
                 .collect(Collectors.toList());
 
-        // Crear el objeto Page con el total de elementos correcto
         return new PageImpl<>(responseList, pageable, totalElements);
     }
 
