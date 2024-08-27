@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.dto;
+package com.emazon.stockservice.application.dto.brand;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryResponse {
+public class BrandResponse {
 
     private Long id;
     private String name;

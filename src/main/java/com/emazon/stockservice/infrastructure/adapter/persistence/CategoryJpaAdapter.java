@@ -4,7 +4,7 @@ import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.models.Pagination;
 import com.emazon.stockservice.domain.models.SortOrder;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
-import com.emazon.stockservice.infrastructure.adapter.CategoryRepository;
+import com.emazon.stockservice.infrastructure.repository.CategoryRepository;
 import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
 import com.emazon.stockservice.infrastructure.web.output.jpa.mapper.CategoryEntityMapper;
 import lombok.RequiredArgsConstructor;

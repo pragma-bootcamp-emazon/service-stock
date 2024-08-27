@@ -14,15 +14,12 @@ public class CreateCategoryUseCase implements ICreateCategoryUseCase {
 
     @Override
     public Category execute(String name, String description) {
-        // Verificar si la categoría ya existe
+
         if (categoryPersistencePort.existsByName(name)) {
             throw new CategoryAlreadyExistsException("Category name already exists");
         }
 
-        // Crear la entidad de dominio
         Category category = new Category(name, description);
-
-        // Guardar la entidad de dominio en el puerto de persistencia
         return categoryPersistencePort.save(category);
     }
 }

@@ -4,6 +4,7 @@ import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.models.Pagination;
 import com.emazon.stockservice.domain.models.SortOrder;
 import com.emazon.stockservice.infrastructure.adapter.persistence.CategoryJpaAdapter;
+import com.emazon.stockservice.infrastructure.repository.CategoryRepository;
 import com.emazon.stockservice.infrastructure.web.output.jpa.mapper.CategoryEntityMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

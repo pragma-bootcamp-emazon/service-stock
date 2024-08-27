@@ -1,8 +1,8 @@
 package com.emazon.stockservice.infrastructure.web.input;
 
 import com.emazon.stockservice.application.service.ICategoryService;
-import com.emazon.stockservice.application.dto.CategoryRequest;
-import com.emazon.stockservice.application.dto.CategoryResponse;
+import com.emazon.stockservice.application.dto.category.CategoryRequest;
+import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
