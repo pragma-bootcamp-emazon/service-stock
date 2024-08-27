@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.usecase;
+package com.emazon.stockservice.application.usecase.create;
 
 import com.emazon.stockservice.application.exceptions.CategoryAlreadyExistsException;
 import com.emazon.stockservice.domain.models.Category;

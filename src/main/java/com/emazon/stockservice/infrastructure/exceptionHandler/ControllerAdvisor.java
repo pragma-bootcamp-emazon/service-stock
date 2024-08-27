@@ -1,6 +1,7 @@
 package com.emazon.stockservice.infrastructure.exceptionHandler;
 
 import com.emazon.stockservice.application.exceptions.CategoryAlreadyExistsException;
+import com.emazon.stockservice.domain.exceptions.CategoryValidationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.Collections;
 import java.util.Map;
-
 import java.util.HashMap;
-
 
 @ControllerAdvice
 public class ControllerAdvisor {
@@ -35,6 +34,12 @@ public class ControllerAdvisor {
     public ResponseEntity<Map<String, String>> handleCategoryAlreadyExistsException(
             CategoryAlreadyExistsException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(MESSAGE, ex.getMessage()));
+    }
+
+    @ExceptionHandler(CategoryValidationException.class)
+    public ResponseEntity<Map<String, String>> handleCategoryValidationException(CategoryValidationException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, ex.getMessage()));
     }
 }
