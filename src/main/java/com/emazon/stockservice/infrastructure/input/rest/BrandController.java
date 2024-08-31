@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.web.input;
+package com.emazon.stockservice.infrastructure.input.rest;
 
 import com.emazon.stockservice.application.dto.brand.BrandRequest;
 import com.emazon.stockservice.application.dto.brand.BrandResponse;

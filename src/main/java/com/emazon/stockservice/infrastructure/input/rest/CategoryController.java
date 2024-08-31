@@ -1,11 +1,10 @@
-package com.emazon.stockservice.infrastructure.web.input;
+package com.emazon.stockservice.infrastructure.input.rest;
 
 import com.emazon.stockservice.application.dto.category.PaginatedResponse;
 import com.emazon.stockservice.application.handler.category.ICategoryService;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

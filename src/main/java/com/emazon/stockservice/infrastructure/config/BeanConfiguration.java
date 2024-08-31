@@ -16,12 +16,12 @@ import com.emazon.stockservice.application.usecase.retrieve.brand.IRetrieveBrand
 import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import com.emazon.stockservice.domain.usecases.category.retrieve.RetrieveAllCategoriesUseCase;
-import com.emazon.stockservice.infrastructure.mappers.brand.BrandEntityMapper;
-import com.emazon.stockservice.infrastructure.web.output.CategoryEntityMapper;
-import com.emazon.stockservice.infrastructure.repository.BrandRepository;
-import com.emazon.stockservice.infrastructure.repository.CategoryRepository;
-import com.emazon.stockservice.infrastructure.adapters.BrandJpaAdapter;
-import com.emazon.stockservice.infrastructure.adapters.CategoryJpaAdapter;
+import com.emazon.stockservice.infrastructure.output.jpa.mappers.brand.BrandEntityMapper;
+import com.emazon.stockservice.infrastructure.output.jpa.mappers.category.CategoryEntityMapper;
+import com.emazon.stockservice.infrastructure.output.jpa.repository.BrandRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.repository.CategoryRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.adapters.BrandJpaAdapter;
+import com.emazon.stockservice.infrastructure.output.jpa.adapters.CategoryJpaAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

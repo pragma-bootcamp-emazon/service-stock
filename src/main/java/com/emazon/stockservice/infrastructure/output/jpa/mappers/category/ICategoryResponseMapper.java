@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.web.output;
+package com.emazon.stockservice.infrastructure.output.jpa.mappers.category;
 
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;

@@ -1,13 +1,13 @@
-package com.emazon.stockservice.infrastructure.adapters;
+package com.emazon.stockservice.infrastructure.output.jpa.adapters;
 
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.utils.PaginatedResult;
 import com.emazon.stockservice.domain.utils.Pagination;
 import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
-import com.emazon.stockservice.infrastructure.repository.CategoryRepository;
-import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
-import com.emazon.stockservice.infrastructure.web.output.CategoryEntityMapper;
+import com.emazon.stockservice.infrastructure.output.jpa.repository.CategoryRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.entities.CategoryEntity;
+import com.emazon.stockservice.infrastructure.output.jpa.mappers.category.CategoryEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

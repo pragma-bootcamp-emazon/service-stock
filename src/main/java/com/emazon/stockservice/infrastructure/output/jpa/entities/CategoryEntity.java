@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.entities;
+package com.emazon.stockservice.infrastructure.output.jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,12 +10,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "brands")
+@Table(name = "categories")
 @Getter
 @Setter
 @NoArgsConstructor
-public class BrandEntity {
-
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -24,7 +23,7 @@ public class BrandEntity {
     @Column(nullable = false, length = 50, unique = true)
     private String name;
 
-    @Column(nullable = false, length = 120)
+    @Column(nullable = false, length = 90)
     private String description;
 
     @CreationTimestamp

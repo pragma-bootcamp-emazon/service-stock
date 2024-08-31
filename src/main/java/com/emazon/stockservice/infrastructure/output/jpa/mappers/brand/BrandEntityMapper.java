@@ -1,7 +1,7 @@
-package com.emazon.stockservice.infrastructure.mappers.brand;
+package com.emazon.stockservice.infrastructure.output.jpa.mappers.brand;
 
 import com.emazon.stockservice.domain.models.Brand;
-import com.emazon.stockservice.infrastructure.entities.BrandEntity;
+import com.emazon.stockservice.infrastructure.output.jpa.entities.BrandEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

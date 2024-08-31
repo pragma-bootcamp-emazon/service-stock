@@ -1,9 +1,10 @@
 package com.emazon.stockservice.infrastructure.adapters;
 
 import com.emazon.stockservice.domain.models.Brand;
-import com.emazon.stockservice.infrastructure.entities.BrandEntity;
-import com.emazon.stockservice.infrastructure.mappers.brand.BrandEntityMapper;
-import com.emazon.stockservice.infrastructure.repository.BrandRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.entities.BrandEntity;
+import com.emazon.stockservice.infrastructure.output.jpa.mappers.brand.BrandEntityMapper;
+import com.emazon.stockservice.infrastructure.output.jpa.adapters.BrandJpaAdapter;
+import com.emazon.stockservice.infrastructure.output.jpa.repository.BrandRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

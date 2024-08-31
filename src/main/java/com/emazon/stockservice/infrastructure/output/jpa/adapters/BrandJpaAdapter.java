@@ -1,12 +1,12 @@
-package com.emazon.stockservice.infrastructure.adapters;
+package com.emazon.stockservice.infrastructure.output.jpa.adapters;
 
 import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.domain.utils.Pagination;
 import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
-import com.emazon.stockservice.infrastructure.entities.BrandEntity;
-import com.emazon.stockservice.infrastructure.mappers.brand.BrandEntityMapper;
-import com.emazon.stockservice.infrastructure.repository.BrandRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.entities.BrandEntity;
+import com.emazon.stockservice.infrastructure.output.jpa.mappers.brand.BrandEntityMapper;
+import com.emazon.stockservice.infrastructure.output.jpa.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
