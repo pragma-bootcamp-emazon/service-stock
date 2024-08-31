@@ -29,7 +29,7 @@ class CreateCategoryUseCaseTest {
     void createCategory_Success() {
         String validDescription = "This is a valid description with more than 90";
         Category category = new Category("New Category", validDescription);
-        Category savedCategory = new Category(1L, "New Category", validDescription);
+        Category savedCategory = new Category(1L, "New Category", validDescription, null, null);
 
         when(categoryPersistencePort.existsByName(anyString())).thenReturn(false);
         when(categoryPersistencePort.save(any(Category.class))).thenReturn(savedCategory);

@@ -34,8 +34,8 @@ class RetrieveAllCategoriesUseCaseTest {
         Pagination pagination = new Pagination(0, 10);
         SortOrder sortOrder = new SortOrder("name", SortOrder.Direction.ASC);
 
-        Category category1 = new Category(1L, "Category 1", "Description 1");
-        Category category2 = new Category(2L, "Category 2", "Description 2");
+        Category category1 = new Category(1L, "Category 1", "Description 1", null, null);
+        Category category2 = new Category(2L, "Category 2", "Description 2", null, null);
         List<Category> categories = Arrays.asList(category1, category2);
 
         PaginatedResult<Category> paginatedResult = new PaginatedResult<>(categories, 0, 10, 2, 1);
