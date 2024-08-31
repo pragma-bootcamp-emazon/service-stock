@@ -2,7 +2,7 @@ package com.emazon.stockservice.infrastructure.web.input;
 
 import com.emazon.stockservice.application.dto.brand.BrandRequest;
 import com.emazon.stockservice.application.dto.brand.BrandResponse;
-import com.emazon.stockservice.application.service.IBrandService;
+import com.emazon.stockservice.application.handler.brand.IBrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,15 +31,15 @@ public class BrandController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-//    @GetMapping("/brands")
-//    public ResponseEntity<Page<BrandResponse>> listBrands(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size,
-//            @RequestParam(defaultValue = "ASC") Sort.Direction sortDirection,
-//            @RequestParam(defaultValue = "name") String sortBy) {
-//
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<BrandResponse> response = brandService.getAllBrands(pageable, sortDirection, sortBy);
-//        return ResponseEntity.ok(response);
-//    }
+    @GetMapping("/brands")
+    public ResponseEntity<Page<BrandResponse>> listBrands(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "ASC") Sort.Direction sortDirection,
+            @RequestParam(defaultValue = "name") String sortBy) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<BrandResponse> response = brandService.getAllBrands(pageable, sortDirection, sortBy);
+        return ResponseEntity.ok(response);
+    }
 }

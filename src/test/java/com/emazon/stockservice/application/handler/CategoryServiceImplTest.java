@@ -1,10 +1,11 @@
-package com.emazon.stockservice.application.service;
+package com.emazon.stockservice.application.handler;
 
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
+import com.emazon.stockservice.application.handler.category.CategoryServiceImpl;
 import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
 import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
-import com.emazon.stockservice.application.usecase.create.ICreateCategoryUseCase;
+import com.emazon.stockservice.domain.usecases.category.create.ICreateCategoryUseCase;
 import com.emazon.stockservice.application.usecase.retrieve.IRetrieveCategories;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.models.Pagination;

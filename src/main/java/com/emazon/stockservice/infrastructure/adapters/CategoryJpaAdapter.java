@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.adapter.persistence;
+package com.emazon.stockservice.infrastructure.adapters;
 
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.models.Pagination;
@@ -6,7 +6,7 @@ import com.emazon.stockservice.domain.models.SortOrder;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import com.emazon.stockservice.infrastructure.repository.CategoryRepository;
 import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
-import com.emazon.stockservice.infrastructure.web.output.jpa.mapper.CategoryEntityMapper;
+import com.emazon.stockservice.infrastructure.web.output.CategoryEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

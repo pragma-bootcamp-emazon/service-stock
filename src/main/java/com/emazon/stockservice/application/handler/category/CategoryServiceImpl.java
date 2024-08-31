@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.service;
+package com.emazon.stockservice.application.handler.category;
 
 import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
 import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
@@ -8,7 +8,7 @@ import com.emazon.stockservice.domain.models.Pagination;
 import com.emazon.stockservice.domain.models.SortOrder;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
-import com.emazon.stockservice.application.usecase.create.ICreateCategoryUseCase;
+import com.emazon.stockservice.domain.usecases.category.create.ICreateCategoryUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public CategoryResponse createCategory(CategoryRequest categoryRequest) {
+
         Category category = categoryRequestMapper.toCategory(categoryRequest);
         Category createdCategory = createCategoryUseCase.execute(
                 category.getName(),

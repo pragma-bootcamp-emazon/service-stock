@@ -1,4 +1,4 @@
-package com.emazon.stockservice.domain.spi;
+package com.emazon.stockservice.application.usecase.retrieve.brand;
 
 import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.domain.models.Pagination;
@@ -6,8 +6,7 @@ import com.emazon.stockservice.domain.models.SortOrder;
 
 import java.util.List;
 
-public interface IBrandPersistencePort {
-    Brand save(Brand brand);
-    List<Brand> getAllBrands(Pagination pagination, SortOrder sortOrder);
+public interface IRetrieveBrands {
+    List<Brand> execute(Pagination pagination, SortOrder sortOrder);
     long countTotalBrands();
 }

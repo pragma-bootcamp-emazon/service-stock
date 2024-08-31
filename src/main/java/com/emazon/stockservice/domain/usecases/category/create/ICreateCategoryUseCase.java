@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.usecase.create;
+package com.emazon.stockservice.domain.usecases.category.create;
 
 import com.emazon.stockservice.domain.models.Category;
 

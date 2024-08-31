@@ -1,4 +1,4 @@
-package com.emazon.stockservice.infrastructure.adapter.persistence;
+package com.emazon.stockservice.infrastructure.adapters;
 
 import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.infrastructure.entities.BrandEntity;

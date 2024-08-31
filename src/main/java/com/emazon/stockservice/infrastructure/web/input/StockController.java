@@ -1,6 +1,6 @@
 package com.emazon.stockservice.infrastructure.web.input;
 
-import com.emazon.stockservice.application.service.ICategoryService;
+import com.emazon.stockservice.application.handler.category.ICategoryService;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import lombok.RequiredArgsConstructor;

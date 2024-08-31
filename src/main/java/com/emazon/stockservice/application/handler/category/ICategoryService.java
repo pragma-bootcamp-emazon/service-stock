@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.service;
+package com.emazon.stockservice.application.handler.category;
 
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;

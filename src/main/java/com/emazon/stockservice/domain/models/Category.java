@@ -1,14 +1,12 @@
 package com.emazon.stockservice.domain.models;
 
-import com.emazon.stockservice.domain.exceptions.CategoryValidationException;
+import com.emazon.stockservice.domain.exceptions.DomainException;
+import com.emazon.stockservice.domain.exceptions.ErrorCode;
 
 public class Category {
-    private Long id;
-    private String name;
-    private String description;
-
-    public Category() {
-    }
+    private final Long id;
+    private final String name;
+    private final String description;
 
     public Category(Long id, String name, String description) {
         validateName(name);
@@ -34,30 +32,18 @@ public class Category {
         return description;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     private void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new CategoryValidationException("The category name cannot be empty");
+            throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
         }
         if (name.length() > 50) {
-            throw new CategoryValidationException("The category name cannot exceed 50 characters");
+            throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
         }
     }
 
     private void validateDescription(String description) {
-        if (description != null && description.length() > 200) {
-            throw new CategoryValidationException("The category description cannot exceed 200 characters");
+        if (description != null && description.length() > 90) {
+            throw new DomainException(ErrorCode.INVALID_CATEGORY_DESCRIPTION);
         }
     }
 }
