@@ -13,8 +13,10 @@ public abstract class CategoryEntityMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "description", source = "description")
+    @Mapping(target = "createdAt", source = "createdAt")
+    @Mapping(target = "updatedAt", source = "updatedAt")
     public Category toDomain(CategoryEntity categoryEntity) {
-        return new Category(categoryEntity.getId(), categoryEntity.getName(), categoryEntity.getDescription());
+        return new Category(categoryEntity.getId(), categoryEntity.getName(), categoryEntity.getDescription(), categoryEntity.getCreatedAt(), categoryEntity.getUpdatedAt());
     }
 
     public abstract CategoryEntity toEntity(Category category);

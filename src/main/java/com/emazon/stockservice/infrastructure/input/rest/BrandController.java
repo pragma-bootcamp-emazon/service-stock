@@ -31,6 +31,7 @@ public class BrandController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Get all brands", description = "This endpoint returns all brands")
     @GetMapping("/brands")
     public ResponseEntity<Page<BrandResponse>> listBrands(
             @RequestParam(defaultValue = "0") int page,

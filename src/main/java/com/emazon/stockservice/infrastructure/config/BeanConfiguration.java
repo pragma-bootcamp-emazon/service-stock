@@ -2,11 +2,11 @@ package com.emazon.stockservice.infrastructure.config;
 
 import com.emazon.stockservice.application.mapper.brand.IBrandRequestMapper;
 import com.emazon.stockservice.application.mapper.brand.IBrandResponseMapper;
-import com.emazon.stockservice.application.handler.category.ICategoryService;
+import com.emazon.stockservice.application.handler.category.ICategoryHandler;
 import com.emazon.stockservice.application.handler.brand.BrandServiceImpl;
 import com.emazon.stockservice.application.usecase.create.brand.ICreateBrandUseCase;
 import com.emazon.stockservice.application.handler.brand.IBrandService;
-import com.emazon.stockservice.application.handler.category.CategoryServiceImpl;
+import com.emazon.stockservice.application.handler.category.CategoryHandler;
 import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
 import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
 import com.emazon.stockservice.domain.usecases.category.create.CreateCategoryUseCase;
@@ -44,8 +44,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ICategoryService categoryService(ICreateCategoryUseCase createCategoryUseCase, IRetrieveCategories retrieveCategories, ICategoryRequestMapper categoryRequestMapper, ICategoryResponseMapperApplication categoryResponseMapper) {
-        return new CategoryServiceImpl(createCategoryUseCase, retrieveCategories, categoryRequestMapper, categoryResponseMapper);
+    public ICategoryHandler categoryService(ICreateCategoryUseCase createCategoryUseCase, IRetrieveCategories retrieveCategories, ICategoryRequestMapper categoryRequestMapper, ICategoryResponseMapperApplication categoryResponseMapper) {
+        return new CategoryHandler(createCategoryUseCase, retrieveCategories, categoryRequestMapper, categoryResponseMapper);
     }
 
     @Bean

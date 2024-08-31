@@ -1,7 +1,7 @@
 package com.emazon.stockservice.infrastructure.input.rest;
 
 import com.emazon.stockservice.application.dto.category.PaginatedResponse;
-import com.emazon.stockservice.application.handler.category.ICategoryService;
+import com.emazon.stockservice.application.handler.category.ICategoryHandler;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @Tag(name = "Stock", description = "Operations related to stock management")
 public class CategoryController {
 
-    private final ICategoryService categoryService;
+    private final ICategoryHandler categoryService;
 
     @PostMapping("/categories")
     @Operation(summary = "Create a new category", description = "This endpoint creates a new category")

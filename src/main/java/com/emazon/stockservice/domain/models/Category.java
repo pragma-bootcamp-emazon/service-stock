@@ -3,21 +3,27 @@ package com.emazon.stockservice.domain.models;
 import com.emazon.stockservice.domain.exceptions.DomainException;
 import com.emazon.stockservice.domain.exceptions.ErrorCode;
 
+import java.time.LocalDateTime;
+
 public class Category {
     private final Long id;
     private final String name;
     private final String description;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
-    public Category(Long id, String name, String description) {
+    public Category(Long id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
         validateName(name);
         validateDescription(description);
         this.id = id;
         this.name = name;
         this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Category(String name, String description) {
-        this(null, name, description);
+        this(null, name, description, null, null);
     }
 
     public Long getId() {
@@ -30,6 +36,14 @@ public class Category {
 
     public String getDescription() {
         return description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     private void validateName(String name) {

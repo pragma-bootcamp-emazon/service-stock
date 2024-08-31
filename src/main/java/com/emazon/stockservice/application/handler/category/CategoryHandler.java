@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements ICategoryService {
+public class CategoryHandler implements ICategoryHandler {
 
     private final ICreateCategoryUseCase createCategoryUseCase;
     private final IRetrieveCategories retrieveCategoriesUseCase;
@@ -40,14 +40,14 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public PaginatedResponse<CategoryResponse> getAllCategories(Pageable pageable) {
         Pagination pagination = new Pagination(pageable.getPageNumber(), pageable.getPageSize());
-        Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("name")); // default order
+        Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("name"));
         SortOrder.Direction direction = order.isAscending() ? SortOrder.Direction.ASC : SortOrder.Direction.DESC;
         SortOrder sortOrder = new SortOrder(order.getProperty(), direction);
 
         var paginatedResult = retrieveCategoriesUseCase.execute(pagination, sortOrder);
 
         List<CategoryResponse> content = paginatedResult.getContent().stream()
-                .map(category -> new CategoryResponse(category.getId(), category.getName(), category.getDescription()))
+                .map(category -> new CategoryResponse(category.getId(), category.getName(), category.getDescription(), category.getCreatedAt(), category.getUpdatedAt()))
                 .collect(Collectors.toList());
 
         return new PaginatedResponse<>(

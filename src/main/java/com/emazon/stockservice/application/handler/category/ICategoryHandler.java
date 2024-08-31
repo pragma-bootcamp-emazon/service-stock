@@ -6,7 +6,7 @@ import com.emazon.stockservice.application.dto.category.PaginatedResponse;
 import org.springframework.data.domain.Pageable;
 
 
-public interface ICategoryService {
+public interface ICategoryHandler {
     CategoryResponse createCategory(CategoryRequest categoryRequest);
 
     PaginatedResponse<CategoryResponse> getAllCategories(Pageable pageable);
