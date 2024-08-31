@@ -1,6 +1,6 @@
 package com.emazon.stockservice.domain.utils;
 
-public class SortOrder {
+public class SortCriteria {
 
     public enum Direction {
         ASC, DESC
@@ -9,7 +9,7 @@ public class SortOrder {
     private final String sortBy;
     private final Direction direction;
 
-    public SortOrder(String sortBy, Direction direction) {
+    public SortCriteria(String sortBy, Direction direction) {
         this.sortBy = sortBy;
         this.direction = direction;
     }

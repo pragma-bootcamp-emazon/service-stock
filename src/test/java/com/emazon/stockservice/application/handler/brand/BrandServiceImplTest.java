@@ -4,7 +4,7 @@ import com.emazon.stockservice.application.dto.brand.BrandRequest;
 import com.emazon.stockservice.application.dto.brand.BrandResponse;
 import com.emazon.stockservice.application.mapper.brand.IBrandRequestMapper;
 import com.emazon.stockservice.application.mapper.brand.IBrandResponseMapper;
-import com.emazon.stockservice.application.usecase.create.brand.ICreateBrandUseCase;
+import com.emazon.stockservice.domain.usecases.brand.create.ICreateBrandUseCase;
 import com.emazon.stockservice.domain.models.Brand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class BrandServiceImplTest {
     private IBrandResponseMapper brandResponseMapper;
 
     @InjectMocks
-    private BrandServiceImpl brandService;
+    private BrandHandler brandService;
 
     @BeforeEach
     void setUp() {
@@ -37,9 +37,9 @@ class BrandServiceImplTest {
     @Test
     void createBrand_Success() {
         BrandRequest request = new BrandRequest("New Brand", "Description");
-        Brand brand = new Brand(null, "New Brand", "Description");
-        Brand savedBrand = new Brand(1L, "New Brand", "Description");
-        BrandResponse expectedResponse = new BrandResponse(1L, "New Brand", "Description");
+        Brand brand = new Brand(null, "New Brand", "Description", null, null);
+        Brand savedBrand = new Brand(1L, "New Brand", "Description", null, null);
+        BrandResponse expectedResponse = new BrandResponse(1L, "New Brand", "Description", null, null);
 
         when(brandRequestMapper.toBrand(request)).thenReturn(brand);
         when(createBrandUseCase.execute(brand.getName(), brand.getDescription())).thenReturn(savedBrand);

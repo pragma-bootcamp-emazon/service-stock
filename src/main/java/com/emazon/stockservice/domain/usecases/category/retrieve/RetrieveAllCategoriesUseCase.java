@@ -3,7 +3,7 @@ package com.emazon.stockservice.domain.usecases.category.retrieve;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.utils.PaginatedResult;
 import com.emazon.stockservice.domain.utils.Pagination;
-import com.emazon.stockservice.domain.utils.SortOrder;
+import com.emazon.stockservice.domain.utils.SortCriteria;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 
 
@@ -16,7 +16,7 @@ public class RetrieveAllCategoriesUseCase implements IRetrieveCategories {
     }
 
     @Override
-    public PaginatedResult<Category> execute(Pagination pagination, SortOrder sortOrder) {
+    public PaginatedResult<Category> execute(Pagination pagination, SortCriteria sortOrder) {
         return categoryPersistencePort.getAllCategories(pagination, sortOrder);
     }
 

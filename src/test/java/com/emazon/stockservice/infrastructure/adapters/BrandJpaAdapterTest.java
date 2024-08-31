@@ -33,7 +33,7 @@ class BrandJpaAdapterTest {
     @Test
     void save_ShouldReturnSavedBrand_WhenBrandIsSavedSuccessfully() {
 
-        Brand brand = new Brand(null, "Brand Name", "Brand Description");
+        Brand brand = new Brand(null, "Brand Name", "Brand Description", null, null);
         BrandEntity brandEntity = new BrandEntity();
         brandEntity.setName("Brand Name");
         brandEntity.setDescription("Brand Description");
@@ -43,7 +43,7 @@ class BrandJpaAdapterTest {
         savedEntity.setName("Brand Name");
         savedEntity.setDescription("Brand Description");
 
-        Brand expectedBrand = new Brand(1L, "Brand Name", "Brand Description");
+        Brand expectedBrand = new Brand(1L, "Brand Name", "Brand Description", null, null);
 
         when(brandEntityMapper.toEntity(brand)).thenReturn(brandEntity);
         when(brandRepository.save(brandEntity)).thenReturn(savedEntity);

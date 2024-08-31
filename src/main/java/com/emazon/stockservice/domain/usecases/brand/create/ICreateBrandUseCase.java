@@ -1,4 +1,4 @@
-package com.emazon.stockservice.application.usecase.create.brand;
+package com.emazon.stockservice.domain.usecases.brand.create;
 
 import com.emazon.stockservice.domain.models.Brand;
 

@@ -2,7 +2,8 @@ package com.emazon.stockservice.infrastructure.input.rest;
 
 import com.emazon.stockservice.application.dto.brand.BrandRequest;
 import com.emazon.stockservice.application.dto.brand.BrandResponse;
-import com.emazon.stockservice.application.handler.brand.IBrandService;
+import com.emazon.stockservice.application.dto.category.PaginatedResponse;
+import com.emazon.stockservice.application.handler.brand.IBrandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +23,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @Tag(name = "Brand", description = "Operations related to brand management")
 public class BrandController {
 
-    private final IBrandService brandService;
+    private final IBrandHandler brandService;
 
     @PostMapping("/brands")
     @Operation(summary = "Create a new brand", description = "This endpoint creates a new brand")
@@ -33,14 +34,16 @@ public class BrandController {
 
     @Operation(summary = "Get all brands", description = "This endpoint returns all brands")
     @GetMapping("/brands")
-    public ResponseEntity<Page<BrandResponse>> listBrands(
+    public ResponseEntity<PaginatedResponse<BrandResponse>> listBrands(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "ASC") Sort.Direction sortDirection,
+            @RequestParam(defaultValue = "ASC") String sortDirection,
             @RequestParam(defaultValue = "name") String sortBy) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<BrandResponse> response = brandService.getAllBrands(pageable, sortDirection, sortBy);
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        PaginatedResponse<BrandResponse> response = brandService.getAllBrands(pageable);
         return ResponseEntity.ok(response);
     }
 }

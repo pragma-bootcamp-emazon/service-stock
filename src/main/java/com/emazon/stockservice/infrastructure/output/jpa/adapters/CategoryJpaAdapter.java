@@ -3,7 +3,7 @@ package com.emazon.stockservice.infrastructure.output.jpa.adapters;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.utils.PaginatedResult;
 import com.emazon.stockservice.domain.utils.Pagination;
-import com.emazon.stockservice.domain.utils.SortOrder;
+import com.emazon.stockservice.domain.utils.SortCriteria;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import com.emazon.stockservice.infrastructure.output.jpa.repository.CategoryRepository;
 import com.emazon.stockservice.infrastructure.output.jpa.entities.CategoryEntity;
@@ -33,7 +33,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     }
 
     @Override
-    public PaginatedResult<Category> getAllCategories(Pagination pagination, SortOrder sortOrder) {
+    public PaginatedResult<Category> getAllCategories(Pagination pagination, SortCriteria sortOrder) {
         Pageable pageable = PageRequest.of(
                 pagination.getPage(),
                 pagination.getSize(),

@@ -1,22 +1,21 @@
-package com.emazon.stockservice.application.usecase.retrieve.brand;
+package com.emazon.stockservice.domain.usecases.brand.retrieve;
 
 import com.emazon.stockservice.domain.models.Brand;
+import com.emazon.stockservice.domain.utils.PaginatedResult;
 import com.emazon.stockservice.domain.utils.Pagination;
-import com.emazon.stockservice.domain.utils.SortOrder;
+import com.emazon.stockservice.domain.utils.SortCriteria;
 import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
 
-@Component
-@RequiredArgsConstructor
 public class RetrieveAllBrandsUseCase implements IRetrieveBrands {
 
     private final IBrandPersistencePort brandPersistencePort;
 
+    public RetrieveAllBrandsUseCase(IBrandPersistencePort brandPersistencePort) {
+        this.brandPersistencePort = brandPersistencePort;
+    }
     @Override
-    public List<Brand> execute(Pagination pagination, SortOrder sortOrder) {
+    public PaginatedResult<Brand> execute(Pagination pagination, SortCriteria sortOrder) {
         return brandPersistencePort.getAllBrands(pagination, sortOrder);
     }
 

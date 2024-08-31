@@ -1,25 +1,33 @@
 package com.emazon.stockservice.domain.models;
 
 import com.emazon.stockservice.domain.exceptions.BrandValidationException;
+import com.emazon.stockservice.domain.exceptions.DomainException;
+import com.emazon.stockservice.domain.exceptions.ErrorCode;
+
+import java.time.LocalDateTime;
 
 public class Brand {
     private Long id;
     private String name;
     private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Brand() {
     }
 
-    public Brand(Long id, String name, String description) {
+    public Brand(Long id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
         validateName(name);
         validateDescription(description);
         this.id = id;
         this.name = name;
         this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Brand(String name, String description) {
-        this(null, name, description);
+        this(null, name, description, null, null);
     }
 
     public Long getId() {
@@ -38,6 +46,14 @@ public class Brand {
         this.id = id;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
     public void setName(String name) {
         validateName(name);
         this.name = name;
@@ -50,19 +66,19 @@ public class Brand {
 
     private void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new BrandValidationException("The brand name cannot be empty");
+            throw new DomainException(ErrorCode.CATEGORY_ALREADY_EXISTS);
         }
         if (name.length() > 50) {
-            throw new BrandValidationException("The brand name cannot exceed 50 characters");
+            throw new DomainException(ErrorCode.INVALID_BRAND_NAME);
         }
     }
 
     private void validateDescription(String description) {
         if (description == null || description.trim().isEmpty()) {
-            throw new BrandValidationException("The brand description cannot be empty");
+            throw new DomainException(ErrorCode.BRAND_NOT_EMPTY);
         }
         if (description.length() > 120) {
-            throw new BrandValidationException("The brand description cannot exceed 120 characters");
+            throw new DomainException(ErrorCode.INVALID_BRAND_DESCRIPTION);
         }
     }
 }

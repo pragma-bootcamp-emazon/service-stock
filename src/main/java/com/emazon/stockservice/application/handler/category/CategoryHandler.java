@@ -6,7 +6,7 @@ import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplica
 import com.emazon.stockservice.domain.usecases.category.retrieve.IRetrieveCategories;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.utils.Pagination;
-import com.emazon.stockservice.domain.utils.SortOrder;
+import com.emazon.stockservice.domain.utils.SortCriteria;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import com.emazon.stockservice.domain.usecases.category.create.ICreateCategoryUseCase;
@@ -41,8 +41,8 @@ public class CategoryHandler implements ICategoryHandler {
     public PaginatedResponse<CategoryResponse> getAllCategories(Pageable pageable) {
         Pagination pagination = new Pagination(pageable.getPageNumber(), pageable.getPageSize());
         Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("name"));
-        SortOrder.Direction direction = order.isAscending() ? SortOrder.Direction.ASC : SortOrder.Direction.DESC;
-        SortOrder sortOrder = new SortOrder(order.getProperty(), direction);
+        SortCriteria.Direction direction = order.isAscending() ? SortCriteria.Direction.ASC : SortCriteria.Direction.DESC;
+        SortCriteria sortOrder = new SortCriteria(order.getProperty(), direction);
 
         var paginatedResult = retrieveCategoriesUseCase.execute(pagination, sortOrder);
 

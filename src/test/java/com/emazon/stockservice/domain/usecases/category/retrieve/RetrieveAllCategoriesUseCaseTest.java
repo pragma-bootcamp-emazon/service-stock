@@ -4,7 +4,7 @@ import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import com.emazon.stockservice.domain.utils.PaginatedResult;
 import com.emazon.stockservice.domain.utils.Pagination;
-import com.emazon.stockservice.domain.utils.SortOrder;
+import com.emazon.stockservice.domain.utils.SortCriteria;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -32,7 +32,7 @@ class RetrieveAllCategoriesUseCaseTest {
     @Test
     void retrieveAllCategories_Success() {
         Pagination pagination = new Pagination(0, 10);
-        SortOrder sortOrder = new SortOrder("name", SortOrder.Direction.ASC);
+        SortCriteria sortOrder = new SortCriteria("name", SortCriteria.Direction.ASC);
 
         Category category1 = new Category(1L, "Category 1", "Description 1", null, null);
         Category category2 = new Category(2L, "Category 2", "Description 2", null, null);
