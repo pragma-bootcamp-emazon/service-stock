@@ -1,4 +1,4 @@
-package com.emazon.stockservice.domain.models;
+package com.emazon.stockservice.domain.utils;
 
 public class Pagination {
     private final int page;
@@ -17,4 +17,3 @@ public class Pagination {
         return size;
     }
 }
-

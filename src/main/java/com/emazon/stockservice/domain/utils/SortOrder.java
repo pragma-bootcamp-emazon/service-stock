@@ -1,6 +1,7 @@
-package com.emazon.stockservice.domain.models;
+package com.emazon.stockservice.domain.utils;
 
 public class SortOrder {
+
     public enum Direction {
         ASC, DESC
     }

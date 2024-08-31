@@ -1,8 +1,8 @@
 package com.emazon.stockservice.infrastructure.adapters;
 
 import com.emazon.stockservice.domain.models.Brand;
-import com.emazon.stockservice.domain.models.Pagination;
-import com.emazon.stockservice.domain.models.SortOrder;
+import com.emazon.stockservice.domain.utils.Pagination;
+import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
 import com.emazon.stockservice.infrastructure.entities.BrandEntity;
 import com.emazon.stockservice.infrastructure.mappers.brand.BrandEntityMapper;

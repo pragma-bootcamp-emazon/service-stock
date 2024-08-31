@@ -1,11 +1,12 @@
 package com.emazon.stockservice.application.handler.category;
 
+import com.emazon.stockservice.application.dto.category.PaginatedResponse;
 import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
 import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
-import com.emazon.stockservice.application.usecase.retrieve.IRetrieveCategories;
+import com.emazon.stockservice.domain.usecases.category.retrieve.IRetrieveCategories;
 import com.emazon.stockservice.domain.models.Category;
-import com.emazon.stockservice.domain.models.Pagination;
-import com.emazon.stockservice.domain.models.SortOrder;
+import com.emazon.stockservice.domain.utils.Pagination;
+import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
 import com.emazon.stockservice.domain.usecases.category.create.ICreateCategoryUseCase;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements ICategoryService {
 
     private final ICreateCategoryUseCase createCategoryUseCase;
-    private final IRetrieveCategories retrieveCategories;
+    private final IRetrieveCategories retrieveCategoriesUseCase;
     private final ICategoryRequestMapper categoryRequestMapper;
     private final ICategoryResponseMapperApplication categoryResponseMapper;
 
@@ -37,24 +38,24 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public Page<CategoryResponse> getAllCategories(Pageable pageable, Sort.Direction sortDirection, String sortBy) {
+    public PaginatedResponse<CategoryResponse> getAllCategories(Pageable pageable) {
+        Pagination pagination = new Pagination(pageable.getPageNumber(), pageable.getPageSize());
+        Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("name")); // default order
+        SortOrder.Direction direction = order.isAscending() ? SortOrder.Direction.ASC : SortOrder.Direction.DESC;
+        SortOrder sortOrder = new SortOrder(order.getProperty(), direction);
 
-        String sortField = (sortBy == null || sortBy.isEmpty()) ? "name" : sortBy;
-        Pageable pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(sortDirection, sortField));
+        var paginatedResult = retrieveCategoriesUseCase.execute(pagination, sortOrder);
 
-
-        List<Category> categories = retrieveCategories.execute(
-                new Pagination(pageRequest.getPageNumber(), pageRequest.getPageSize()),
-                new SortOrder(sortField, SortOrder.Direction.valueOf(sortDirection.name()))
-        );
-
-        long totalElements = retrieveCategories.countTotalCategories();
-
-        List<CategoryResponse> responseList = categories.stream()
-                .map(categoryResponseMapper::toCategoryResponse)
+        List<CategoryResponse> content = paginatedResult.getContent().stream()
+                .map(category -> new CategoryResponse(category.getId(), category.getName(), category.getDescription()))
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(responseList, pageable, totalElements);
+        return new PaginatedResponse<>(
+                content,
+                paginatedResult.getPage(),
+                paginatedResult.getSize(),
+                paginatedResult.getTotalElements(),
+                paginatedResult.getTotalPages()
+        );
     }
-
 }

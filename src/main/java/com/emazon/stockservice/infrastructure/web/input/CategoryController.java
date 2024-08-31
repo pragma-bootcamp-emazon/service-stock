@@ -1,5 +1,6 @@
 package com.emazon.stockservice.infrastructure.web.input;
 
+import com.emazon.stockservice.application.dto.category.PaginatedResponse;
 import com.emazon.stockservice.application.handler.category.ICategoryService;
 import com.emazon.stockservice.application.dto.category.CategoryRequest;
 import com.emazon.stockservice.application.dto.category.CategoryResponse;
@@ -20,7 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("/stock")
 @RequiredArgsConstructor
 @Tag(name = "Stock", description = "Operations related to stock management")
-public class StockController {
+public class CategoryController {
 
     private final ICategoryService categoryService;
 
@@ -32,14 +33,19 @@ public class StockController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<Page<CategoryResponse>> listCategories(
+    @Operation(summary = "List all categories", description = "This endpoint lists all categories with pagination and sorting")
+    public ResponseEntity<PaginatedResponse<CategoryResponse>> listCategories(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "ASC") Sort.Direction sortDirection,
+            @RequestParam(defaultValue = "ASC") String sortDirection,
             @RequestParam(defaultValue = "name") String sortBy) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<CategoryResponse> response = categoryService.getAllCategories(pageable, sortDirection, sortBy);
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        PaginatedResponse<CategoryResponse> response = categoryService.getAllCategories(pageable);
+
         return ResponseEntity.ok(response);
     }
+
 }

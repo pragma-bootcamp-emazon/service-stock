@@ -7,8 +7,8 @@ import com.emazon.stockservice.application.usecase.retrieve.brand.IRetrieveBrand
 import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.application.dto.brand.BrandRequest;
 import com.emazon.stockservice.application.dto.brand.BrandResponse;
-import com.emazon.stockservice.domain.models.Pagination;
-import com.emazon.stockservice.domain.models.SortOrder;
+import com.emazon.stockservice.domain.utils.Pagination;
+import com.emazon.stockservice.domain.utils.SortOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;

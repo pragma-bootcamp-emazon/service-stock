@@ -1,21 +1,22 @@
-package com.emazon.stockservice.application.usecase.retrieve;
+package com.emazon.stockservice.domain.usecases.category.retrieve;
 
 import com.emazon.stockservice.domain.models.Category;
-import com.emazon.stockservice.domain.models.Pagination;
-import com.emazon.stockservice.domain.models.SortOrder;
+import com.emazon.stockservice.domain.utils.PaginatedResult;
+import com.emazon.stockservice.domain.utils.Pagination;
+import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
 
-@Component
-@RequiredArgsConstructor
 public class RetrieveAllCategoriesUseCase implements IRetrieveCategories {
+
     private final ICategoryPersistencePort categoryPersistencePort;
 
+    public RetrieveAllCategoriesUseCase(ICategoryPersistencePort categoryPersistencePort){
+        this.categoryPersistencePort = categoryPersistencePort;
+    }
+
     @Override
-    public List<Category> execute(Pagination pagination, SortOrder sortOrder) {
+    public PaginatedResult<Category> execute(Pagination pagination, SortOrder sortOrder) {
         return categoryPersistencePort.getAllCategories(pagination, sortOrder);
     }
 

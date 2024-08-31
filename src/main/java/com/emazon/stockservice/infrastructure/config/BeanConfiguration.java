@@ -11,10 +11,11 @@ import com.emazon.stockservice.application.mapper.ICategoryRequestMapper;
 import com.emazon.stockservice.application.mapper.ICategoryResponseMapperApplication;
 import com.emazon.stockservice.domain.usecases.category.create.CreateCategoryUseCase;
 import com.emazon.stockservice.domain.usecases.category.create.ICreateCategoryUseCase;
-import com.emazon.stockservice.application.usecase.retrieve.IRetrieveCategories;
+import com.emazon.stockservice.domain.usecases.category.retrieve.IRetrieveCategories;
 import com.emazon.stockservice.application.usecase.retrieve.brand.IRetrieveBrands;
 import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
+import com.emazon.stockservice.domain.usecases.category.retrieve.RetrieveAllCategoriesUseCase;
 import com.emazon.stockservice.infrastructure.mappers.brand.BrandEntityMapper;
 import com.emazon.stockservice.infrastructure.web.output.CategoryEntityMapper;
 import com.emazon.stockservice.infrastructure.repository.BrandRepository;
@@ -35,6 +36,11 @@ public class BeanConfiguration {
     @Bean
     public ICreateCategoryUseCase createCategoryUseCase(ICategoryPersistencePort categoryPersistencePort) {
         return new CreateCategoryUseCase(categoryPersistencePort);
+    }
+
+    @Bean
+    public IRetrieveCategories retrieveCategories(ICategoryPersistencePort categoryPersistencePort) {
+        return new RetrieveAllCategoriesUseCase(categoryPersistencePort);
     }
 
     @Bean

@@ -1,8 +1,8 @@
 package com.emazon.stockservice.application.usecase.retrieve.brand;
 
 import com.emazon.stockservice.domain.models.Brand;
-import com.emazon.stockservice.domain.models.Pagination;
-import com.emazon.stockservice.domain.models.SortOrder;
+import com.emazon.stockservice.domain.utils.Pagination;
+import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

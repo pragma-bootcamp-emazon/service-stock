@@ -1,13 +1,15 @@
 package com.emazon.stockservice.infrastructure.adapters;
 
 import com.emazon.stockservice.domain.models.Category;
-import com.emazon.stockservice.domain.models.Pagination;
-import com.emazon.stockservice.domain.models.SortOrder;
+import com.emazon.stockservice.domain.utils.PaginatedResult;
+import com.emazon.stockservice.domain.utils.Pagination;
+import com.emazon.stockservice.domain.utils.SortOrder;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import com.emazon.stockservice.infrastructure.repository.CategoryRepository;
 import com.emazon.stockservice.infrastructure.entities.CategoryEntity;
 import com.emazon.stockservice.infrastructure.web.output.CategoryEntityMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Component
 @RequiredArgsConstructor
@@ -32,17 +33,27 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     }
 
     @Override
-    public List<Category> getAllCategories(Pagination pagination, SortOrder sortOrder) {
+    public PaginatedResult<Category> getAllCategories(Pagination pagination, SortOrder sortOrder) {
         Pageable pageable = PageRequest.of(
                 pagination.getPage(),
                 pagination.getSize(),
                 Sort.by(Sort.Direction.valueOf(sortOrder.getDirection().name()), sortOrder.getSortBy())
         );
 
-        return categoryRepository.findAll(pageable).getContent()
+        Page<CategoryEntity> categoryPage = categoryRepository.findAll(pageable);
+
+        List<Category> categories = categoryPage.getContent()
                 .stream()
                 .map(categoryEntityMapper::toDomain)
                 .collect(Collectors.toList());
+
+        return new PaginatedResult<>(
+                categories,
+                pagination.getPage(),
+                pagination.getSize(),
+                categoryPage.getTotalElements(),
+                categoryPage.getTotalPages()
+        );
     }
 
     @Override
