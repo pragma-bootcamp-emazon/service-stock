@@ -48,10 +48,10 @@ public class BeanConfiguration {
         return new CreateBrandUseCase(brandPersistencePort);
     }
 
-//    @Bean
-//    public ICreateArticleUseCase createArticleUseCase(IArticlePersistencePort articlePersistencePort) {
-//        return new CreateArticleUseCase(articlePersistencePort);
-//    }
+    @Bean
+    public ICreateArticleUseCase createArticleUseCase(IArticlePersistencePort articlePersistencePort) {
+        return new CreateArticleUseCase(articlePersistencePort);
+    }
 
     @Bean
     public IRetrieveCategories retrieveCategories(ICategoryPersistencePort categoryPersistencePort) {

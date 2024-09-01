@@ -30,6 +30,9 @@ public class ControllerAdvisor {
         ERROR_CODE_STATUS_MAP.put(ErrorCode.BRAND_ALREADY_EXISTS, HttpStatus.CONFLICT);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_BRAND_NAME, HttpStatus.BAD_REQUEST);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.BRAND_NOT_FOUND, HttpStatus.NOT_FOUND);
+        ERROR_CODE_STATUS_MAP.put(ErrorCode.ARTICLE_ALREADY_EXISTS, HttpStatus.CONFLICT);
+        ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_NAME, HttpStatus.BAD_REQUEST);
+        ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_PRICE, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DomainException.class)
