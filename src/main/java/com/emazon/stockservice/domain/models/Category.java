@@ -51,17 +51,22 @@ public class Category {
     }
 
     private void validateName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
-        }
-        if (name.length() > 50) {
-            throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
+        if (name != null) {  // Solo valida si el nombre no es nulo
+            if (name.trim().isEmpty()) {
+                throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
+            }
+            if (name.length() > 50) {
+                throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
+            }
         }
     }
 
     private void validateDescription(String description) {
-        if (description != null && description.length() > 90) {
-            throw new DomainException(ErrorCode.INVALID_CATEGORY_DESCRIPTION);
+        if (description != null) {  // Solo valida si la descripción no es nula
+            if (description.length() > 90) {
+                throw new DomainException(ErrorCode.INVALID_CATEGORY_DESCRIPTION);
+            }
         }
     }
+
 }
