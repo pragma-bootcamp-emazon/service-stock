@@ -26,6 +26,10 @@ public class Category {
         this(null, name, description, null, null);
     }
 
+    public Category(Long id) {
+        this(id, null, null, null, null);
+    }
+
     public Long getId() {
         return id;
     }

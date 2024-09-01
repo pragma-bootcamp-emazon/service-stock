@@ -10,6 +10,12 @@ public enum ErrorCode {
     BRAND_NOT_FOUND("Brand not found"),
     INVALID_BRAND_DESCRIPTION("The brand description is invalid"),
     BRAND_NOT_EMPTY("The brand is not empty"),
+    INVALID_ARTICLE_NAME("The article name is invalid"),
+    INVALID_ARTICLE_DESCRIPTION("The article description is invalid"),
+    INVALID_ARTICLE_QUANTITY("The article quantity is invalid"),
+    INVALID_ARTICLE_PRICE("The article price is invalid"),
+    INVALID_ARTICLE_CATEGORIES("The article categories are invalid"),
+    ARTICLE_ALREADY_EXISTS("Article name already exists"),
     ;
 
     private final String message;

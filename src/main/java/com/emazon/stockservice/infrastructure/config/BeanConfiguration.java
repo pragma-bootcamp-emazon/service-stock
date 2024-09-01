@@ -4,6 +4,9 @@ import com.emazon.stockservice.application.mapper.brand.IBrandRequestMapper;
 import com.emazon.stockservice.application.mapper.brand.IBrandResponseMapper;
 import com.emazon.stockservice.application.handler.category.ICategoryHandler;
 import com.emazon.stockservice.application.handler.brand.BrandHandler;
+import com.emazon.stockservice.domain.spi.IArticlePersistencePort;
+import com.emazon.stockservice.domain.usecases.article.create.CreateArticleUseCase;
+import com.emazon.stockservice.domain.usecases.article.create.ICreateArticleUseCase;
 import com.emazon.stockservice.domain.usecases.brand.create.CreateBrandUseCase;
 import com.emazon.stockservice.domain.usecases.brand.create.ICreateBrandUseCase;
 import com.emazon.stockservice.application.handler.brand.IBrandHandler;
@@ -44,6 +47,11 @@ public class BeanConfiguration {
     public ICreateBrandUseCase createBrandUseCase(IBrandPersistencePort brandPersistencePort) {
         return new CreateBrandUseCase(brandPersistencePort);
     }
+
+//    @Bean
+//    public ICreateArticleUseCase createArticleUseCase(IArticlePersistencePort articlePersistencePort) {
+//        return new CreateArticleUseCase(articlePersistencePort);
+//    }
 
     @Bean
     public IRetrieveCategories retrieveCategories(ICategoryPersistencePort categoryPersistencePort) {
