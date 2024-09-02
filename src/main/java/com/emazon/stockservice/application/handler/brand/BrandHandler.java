@@ -38,16 +38,14 @@ public class BrandHandler implements IBrandHandler {
 
     @Override
     public PaginatedResponse<BrandResponse> getAllBrands(Pageable pageable) {
-        // Convertir Pageable a nuestras estructuras genéricas
+
         Pagination pagination = new Pagination(pageable.getPageNumber(), pageable.getPageSize());
-        Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("name")); // default order
+        Sort.Order order = pageable.getSort().stream().findFirst().orElse(Sort.Order.by("name"));
         SortCriteria.Direction direction = order.isAscending() ? SortCriteria.Direction.ASC : SortCriteria.Direction.DESC;
         SortCriteria sortOrder = new SortCriteria(order.getProperty(), direction);
 
-        // Llama al caso de uso en el dominio
         var paginatedResult = retrieveBrandsUseCase.execute(pagination, sortOrder);
 
-        // Convierte las entidades de dominio en DTOs
         List<BrandResponse> content = paginatedResult.getContent().stream()
                 .map(brand -> new BrandResponse(
                         brand.getId(),
@@ -57,7 +55,6 @@ public class BrandHandler implements IBrandHandler {
                         brand.getUpdatedAt()))
                 .collect(Collectors.toList());
 
-        // Devuelve la respuesta paginada
         return new PaginatedResponse<>(
                 content,
                 paginatedResult.getPage(),

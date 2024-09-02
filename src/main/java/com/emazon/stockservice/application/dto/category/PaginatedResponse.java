@@ -10,7 +10,6 @@ public class PaginatedResponse<T> {
     private long totalElements;
     private int totalPages;
 
-    // Constructor
     public PaginatedResponse(List<T> content, int page, int size, long totalElements, int totalPages) {
         this.content = content;
         this.page = page;

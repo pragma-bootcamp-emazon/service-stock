@@ -4,6 +4,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,4 +35,7 @@ public class ArticleRequest {
     @NotEmpty(message = "At least one category must be associated")
     @Size(min = 1, max = 3, message = "You must associate between 1 and 3 categories")
     private List<Long> categories;
+
+    @NotNull(message = "The brand ID must be provided")
+    private Long brandId;
 }
