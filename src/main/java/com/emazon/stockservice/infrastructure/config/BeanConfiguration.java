@@ -49,8 +49,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ICreateArticleUseCase createArticleUseCase(IArticlePersistencePort articlePersistencePort) {
-        return new CreateArticleUseCase(articlePersistencePort);
+    public ICreateArticleUseCase createArticleUseCase(IArticlePersistencePort articlePersistencePort, ICategoryPersistencePort categoryPersistencePort) {
+        return new CreateArticleUseCase(articlePersistencePort, categoryPersistencePort);
     }
 
     @Bean

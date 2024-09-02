@@ -2,7 +2,9 @@ package com.emazon.stockservice.application.handler.article;
 
 import com.emazon.stockservice.application.dto.article.ArticleRequest;
 
+import com.emazon.stockservice.application.dto.article.ArticleResponse;
 import com.emazon.stockservice.application.mapper.article.IArticleRequestMapper;
+import com.emazon.stockservice.application.mapper.article.IArticleResponseMapper;
 import com.emazon.stockservice.domain.models.Article;
 import com.emazon.stockservice.domain.usecases.article.create.ICreateArticleUseCase;
 
@@ -16,19 +18,20 @@ public class ArticleHandler implements IArticleHandler {
 
     private final ICreateArticleUseCase createArticleUseCase;
     private final IArticleRequestMapper articleRequestMapper;
+    private final IArticleResponseMapper articleResponseMapper;
 
     @Override
-    public void createArticle(ArticleRequest articleRequest) {
-                Article article = articleRequestMapper.toArticle(articleRequest);
+    public ArticleResponse createArticle(ArticleRequest articleRequest) {
+        Article article = articleRequestMapper.toArticle(articleRequest);
 
-        createArticleUseCase.executeWithIds(
+        Article articleSaved = createArticleUseCase.executeWithIds(
                 article.getName(),
                 article.getDescription(),
                 article.getQuantity(),
                 article.getPrice(),
                 articleRequest.getCategories()
         );
-
+        return articleResponseMapper.toArticleResponse(articleSaved);
     }
-
 }
+

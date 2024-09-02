@@ -5,9 +5,7 @@ import com.emazon.stockservice.domain.exceptions.ErrorCode;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Article {
     private Long id;
@@ -17,9 +15,8 @@ public class Article {
     private BigDecimal price;
     private List<Category> categories;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
-    private Article(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    private Article(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, LocalDateTime createdAt) {
         validateName(name);
         validateCategories(categories);
         this.id = id;
@@ -29,16 +26,20 @@ public class Article {
         this.price = price;
         this.categories = categories;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public static Article createWithoutId(String name, String description, int quantity, BigDecimal price, List<Category> categories) {
-        return new Article(null, name, description, quantity, price, categories, null, null);
+        return new Article(null, name, description, quantity, price, categories, null);
     }
 
-    public static Article createWithId(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        return new Article(id, name, description, quantity, price, categories, createdAt, updatedAt);
+    public static Article createWithId(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, LocalDateTime createdAt) {
+        return new Article(id, name, description, quantity, price, categories, createdAt);
     }
+
+    public static Article createWithoutCategories(Long id, String name) {
+        return new Article(id, name, null, 0, null, null, null);
+    }
+
 
     public Long getId() {
         return id;
@@ -66,10 +67,6 @@ public class Article {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setId(Long id) {
@@ -102,9 +99,6 @@ public class Article {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     private void validateName(String name) {
         if (name == null || name.isBlank() || name.length() < 3 || name.length() > 50) {
@@ -117,9 +111,13 @@ public class Article {
             throw new DomainException(ErrorCode.INVALID_ARTICLE_CATEGORIES);
         }
 
-        Set<Category> uniqueCategories = new HashSet<>(categories);
-        if (uniqueCategories.size() != categories.size()) {
-            throw new DomainException(ErrorCode.INVALID_ARTICLE_CATEGORIES);
+        for (int i = 0; i < categories.size(); i++) {
+            for (int j = i + 1; j < categories.size(); j++) {
+                if (categories.get(i).getId().equals(categories.get(j).getId())) {
+                    throw new DomainException(ErrorCode.INVALID_ARTICLE_CATEGORIES);
+                }
+            }
         }
     }
+
 }

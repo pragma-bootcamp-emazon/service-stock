@@ -51,7 +51,7 @@ public class Category {
     }
 
     private void validateName(String name) {
-        if (name != null) {  // Solo valida si el nombre no es nulo
+        if (name != null) {
             if (name.trim().isEmpty()) {
                 throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
             }
@@ -62,11 +62,8 @@ public class Category {
     }
 
     private void validateDescription(String description) {
-        if (description != null) {  // Solo valida si la descripción no es nula
-            if (description.length() > 90) {
-                throw new DomainException(ErrorCode.INVALID_CATEGORY_DESCRIPTION);
-            }
+        if (description != null && description.length() > 90) {
+            throw new DomainException(ErrorCode.INVALID_CATEGORY_DESCRIPTION);
         }
     }
-
 }

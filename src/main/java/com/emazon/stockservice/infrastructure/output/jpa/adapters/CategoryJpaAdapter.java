@@ -16,7 +16,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -45,7 +44,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
         List<Category> categories = categoryPage.getContent()
                 .stream()
                 .map(categoryEntityMapper::toDomain)
-                .collect(Collectors.toList());
+                .toList();
 
         return new PaginatedResult<>(
                 categories,
@@ -54,6 +53,13 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
                 categoryPage.getTotalElements(),
                 categoryPage.getTotalPages()
         );
+    }
+
+    @Override
+    public List<Category> findByIds(List<Long> ids) {
+        return categoryRepository.findByIdIn(ids).stream()
+                .map(categoryEntityMapper::toDomain)
+                .toList();
     }
 
     @Override

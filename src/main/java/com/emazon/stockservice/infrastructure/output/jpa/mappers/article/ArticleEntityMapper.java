@@ -33,9 +33,14 @@ public interface ArticleEntityMapper {
                 articleEntity.getQuantity(),
                 articleEntity.getPrice(),
                 mapCategories(articleEntity.getCategories()),
-                articleEntity.getCreatedAt(),
-                articleEntity.getUpdatedAt()
+                articleEntity.getCreatedAt()
         );
+    }
+
+
+    @Mapping(target = "categories", ignore = true)
+    default Article toDomainWithoutCategories(ArticleEntity articleEntity) {
+        return Article.createWithoutCategories(articleEntity.getId(), articleEntity.getName());
     }
 
     @Mapping(target = "createdAt", ignore = true)

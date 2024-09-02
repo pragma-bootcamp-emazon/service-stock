@@ -8,8 +8,6 @@ import com.emazon.stockservice.infrastructure.output.jpa.repository.ArticleRepos
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class ArticleJpaAdapter implements IArticlePersistencePort {
@@ -23,7 +21,7 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
 
         ArticleEntity savedEntity = articleRepository.save(articleEntity);
 
-        return article;
+        return articleEntityMapper.toDomain(savedEntity);
     }
 
     @Override

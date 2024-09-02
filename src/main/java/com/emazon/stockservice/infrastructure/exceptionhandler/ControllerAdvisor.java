@@ -4,7 +4,6 @@ import com.emazon.stockservice.domain.exceptions.DomainException;
 import com.emazon.stockservice.domain.exceptions.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +14,6 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ControllerAdvisor {
@@ -33,6 +31,7 @@ public class ControllerAdvisor {
         ERROR_CODE_STATUS_MAP.put(ErrorCode.ARTICLE_ALREADY_EXISTS, HttpStatus.CONFLICT);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_NAME, HttpStatus.BAD_REQUEST);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_PRICE, HttpStatus.BAD_REQUEST);
+        ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_CATEGORIES, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DomainException.class)
@@ -43,7 +42,7 @@ public class ControllerAdvisor {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", status.value());
         body.put("error", status.getReasonPhrase());
-        body.put("message", ex.getMessage());
+        body.put("message_error", ex.getMessage());
         body.put("path", request.getDescription(false).substring(4));
 
         return ResponseEntity.status(status).body(body);
@@ -66,7 +65,7 @@ public class ControllerAdvisor {
                     errorDetails.put("message", fieldError.getDefaultMessage());
                     return errorDetails;
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         body.put("errors", errors);
 
