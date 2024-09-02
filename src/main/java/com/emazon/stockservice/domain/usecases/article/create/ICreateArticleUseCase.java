@@ -5,5 +5,5 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ICreateArticleUseCase {
-    Article executeWithIds(String name, String description, int quantity, BigDecimal price, List<Long> categoryIds);
+    Article executeWithIds(String name, String description, int quantity, BigDecimal price, List<Long> categoryIds, Long brandId);
 }

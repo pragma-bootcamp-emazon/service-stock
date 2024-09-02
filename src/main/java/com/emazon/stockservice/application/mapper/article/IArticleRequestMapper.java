@@ -24,7 +24,8 @@ public abstract class IArticleRequestMapper {
                 articleRequest.getDescription(),
                 articleRequest.getQuantity(),
                 articleRequest.getPrice(),
-                categories
+                categories,
+                articleRequest.getBrandId()
         );
     }
 }
