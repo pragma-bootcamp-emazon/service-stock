@@ -23,7 +23,7 @@ public class CreateArticleUseCase implements ICreateArticleUseCase {
     }
 
     @Override
-    public Article executeWithIds(String name, String description, int quantity, BigDecimal price, List<Long> categoryIds) {
+    public Article executeWithIds(String name, String description, int quantity, BigDecimal price, List<Long> categoryIds, Long brandId) {
 
         List<Category> categories = categoryPersistencePort.findByIds(categoryIds);
 
@@ -35,7 +35,7 @@ public class CreateArticleUseCase implements ICreateArticleUseCase {
             throw new DomainException(ErrorCode.ARTICLE_ALREADY_EXISTS);
         }
 
-        Article article = Article.createWithoutId(name, description, quantity, price, categories);
+        Article article = Article.createWithoutId(name, description, quantity, price, categories, brandId);
 
 
         return articlePersistencePort.save(article);

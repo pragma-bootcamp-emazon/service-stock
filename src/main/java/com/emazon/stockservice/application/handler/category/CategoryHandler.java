@@ -15,7 +15,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +47,7 @@ public class CategoryHandler implements ICategoryHandler {
 
         List<CategoryResponse> content = paginatedResult.getContent().stream()
                 .map(category -> new CategoryResponse(category.getId(), category.getName(), category.getDescription(), category.getCreatedAt(), category.getUpdatedAt()))
-                .collect(Collectors.toList());
+                .toList();
 
         return new PaginatedResponse<>(
                 content,

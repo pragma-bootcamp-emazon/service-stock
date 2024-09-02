@@ -14,9 +14,10 @@ public class Article {
     private int quantity;
     private BigDecimal price;
     private List<Category> categories;
+    private final Long brandId;
     private LocalDateTime createdAt;
 
-    private Article(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, LocalDateTime createdAt) {
+    private Article(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, Long brandId, LocalDateTime createdAt) {
         validateName(name);
         validateCategories(categories);
         this.id = id;
@@ -25,21 +26,17 @@ public class Article {
         this.quantity = quantity;
         this.price = price;
         this.categories = categories;
+        this.brandId = brandId;
         this.createdAt = createdAt;
     }
 
-    public static Article createWithoutId(String name, String description, int quantity, BigDecimal price, List<Category> categories) {
-        return new Article(null, name, description, quantity, price, categories, null);
+    public static Article createWithoutId(String name, String description, int quantity, BigDecimal price, List<Category> categories, Long brandId) {
+        return new Article(null, name, description, quantity, price, categories, brandId, null);
     }
 
-    public static Article createWithId(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, LocalDateTime createdAt) {
-        return new Article(id, name, description, quantity, price, categories, createdAt);
+    public static Article createWithId(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, Long brandId, LocalDateTime createdAt) {
+        return new Article(id, name, description, quantity, price, categories, brandId, createdAt);
     }
-
-    public static Article createWithoutCategories(Long id, String name) {
-        return new Article(id, name, null, 0, null, null, null);
-    }
-
 
     public Long getId() {
         return id;
@@ -63,6 +60,10 @@ public class Article {
 
     public List<Category> getCategories() {
         return categories;
+    }
+
+    public Long getBrandId() {
+        return brandId;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -99,7 +100,6 @@ public class Article {
         this.createdAt = createdAt;
     }
 
-
     private void validateName(String name) {
         if (name == null || name.isBlank() || name.length() < 3 || name.length() > 50) {
             throw new DomainException(ErrorCode.INVALID_ARTICLE_NAME);
@@ -119,5 +119,4 @@ public class Article {
             }
         }
     }
-
 }

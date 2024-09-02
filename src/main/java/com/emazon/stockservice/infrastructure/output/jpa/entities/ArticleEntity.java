@@ -36,6 +36,10 @@ public class ArticleEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
+
+    @Column(nullable = false)
+    private Long brandId;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -45,7 +49,7 @@ public class ArticleEntity {
     private LocalDateTime updatedAt;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonManagedReference  // Marca esto como el lado "gestor" de la relación
+    @JsonManagedReference
     @JoinTable(
             name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),

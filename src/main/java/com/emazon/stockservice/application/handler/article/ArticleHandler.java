@@ -29,8 +29,9 @@ public class ArticleHandler implements IArticleHandler {
                 article.getDescription(),
                 article.getQuantity(),
                 article.getPrice(),
-                articleRequest.getCategories()
-        );
+                articleRequest.getCategories(),
+                article.getBrandId()
+                );
         return articleResponseMapper.toArticleResponse(articleSaved);
     }
 }
