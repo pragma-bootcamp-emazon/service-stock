@@ -26,6 +26,10 @@ public class Category {
         this(null, name, description, null, null);
     }
 
+    public Category(Long id) {
+        this(id, null, null, null, null);
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,11 +51,13 @@ public class Category {
     }
 
     private void validateName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
-        }
-        if (name.length() > 50) {
-            throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
+        if (name != null) {
+            if (name.trim().isEmpty()) {
+                throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
+            }
+            if (name.length() > 50) {
+                throw new DomainException(ErrorCode.INVALID_CATEGORY_NAME);
+            }
         }
     }
 

@@ -1,6 +1,5 @@
 package com.emazon.stockservice.domain.models;
 
-import com.emazon.stockservice.domain.exceptions.BrandValidationException;
 import com.emazon.stockservice.domain.exceptions.DomainException;
 import com.emazon.stockservice.domain.exceptions.ErrorCode;
 
