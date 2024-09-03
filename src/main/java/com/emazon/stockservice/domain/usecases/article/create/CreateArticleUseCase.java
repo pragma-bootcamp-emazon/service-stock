@@ -3,6 +3,7 @@ package com.emazon.stockservice.domain.usecases.article.create;
 import com.emazon.stockservice.domain.exceptions.DomainException;
 import com.emazon.stockservice.domain.exceptions.ErrorCode;
 import com.emazon.stockservice.domain.models.Article;
+import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.spi.IArticlePersistencePort;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
@@ -23,7 +24,7 @@ public class CreateArticleUseCase implements ICreateArticleUseCase {
     }
 
     @Override
-    public Article executeWithIds(String name, String description, int quantity, BigDecimal price, List<Long> categoryIds, Long brandId) {
+    public Article executeWithIds(String name, String description, int quantity, BigDecimal price, List<Long> categoryIds, Brand brandId) {
 
         List<Category> categories = categoryPersistencePort.findByIds(categoryIds);
 

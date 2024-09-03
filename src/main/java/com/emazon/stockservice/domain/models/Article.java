@@ -14,10 +14,10 @@ public class Article {
     private int quantity;
     private BigDecimal price;
     private List<Category> categories;
-    private final Long brandId;
+    private final Brand brand;
     private LocalDateTime createdAt;
 
-    private Article(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, Long brandId, LocalDateTime createdAt) {
+    private Article(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, Brand brand, LocalDateTime createdAt) {
         validateName(name);
         validateCategories(categories);
         this.id = id;
@@ -26,17 +26,18 @@ public class Article {
         this.quantity = quantity;
         this.price = price;
         this.categories = categories;
-        this.brandId = brandId;
+        this.brand = brand;
         this.createdAt = createdAt;
     }
 
-    public static Article createWithoutId(String name, String description, int quantity, BigDecimal price, List<Category> categories, Long brandId) {
-        return new Article(null, name, description, quantity, price, categories, brandId, null);
+    public static Article createWithoutId(String name, String description, int quantity, BigDecimal price, List<Category> categories, Brand brand) {
+        return new Article(null, name, description, quantity, price, categories, brand, null);
     }
 
-    public static Article createWithId(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, Long brandId, LocalDateTime createdAt) {
-        return new Article(id, name, description, quantity, price, categories, brandId, createdAt);
+    public static Article createWithId(Long id, String name, String description, int quantity, BigDecimal price, List<Category> categories, Brand brand, LocalDateTime createdAt) {
+        return new Article(id, name, description, quantity, price, categories, brand, createdAt);
     }
+
 
     public Long getId() {
         return id;
@@ -62,8 +63,8 @@ public class Article {
         return categories;
     }
 
-    public Long getBrandId() {
-        return brandId;
+    public Brand getBrand() {
+        return brand;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -47,7 +47,7 @@ class CreateArticleUseCaseTest {
         when(categoryPersistencePort.findByIds(categoryIds)).thenReturn(categories);
         when(articlePersistencePort.existsByName(name)).thenReturn(false);
 
-        createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds);
+        createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, null);
 
         verify(articlePersistencePort, times(1)).save(any(Article.class));
     }
@@ -64,7 +64,7 @@ class CreateArticleUseCaseTest {
         when(categoryPersistencePort.findByIds(categoryIds)).thenReturn(Arrays.asList(new Category(1L)));
 
         DomainException exception = assertThrows(DomainException.class, () ->
-                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds)
+                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, null)
         );
 
         assertEquals(ErrorCode.CATEGORY_NOT_FOUND, exception.getErrorCode());
@@ -86,7 +86,7 @@ class CreateArticleUseCaseTest {
         when(articlePersistencePort.existsByName(name)).thenReturn(true);
 
         DomainException exception = assertThrows(DomainException.class, () ->
-                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds)
+                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, null)
         );
 
         assertEquals(ErrorCode.ARTICLE_ALREADY_EXISTS, exception.getErrorCode());

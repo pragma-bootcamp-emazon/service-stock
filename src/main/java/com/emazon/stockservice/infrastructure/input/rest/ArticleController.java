@@ -12,6 +12,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+
+import com.emazon.stockservice.infrastructure.output.jpa.repository.ArticleRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.entities.ArticleEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/stock")
 @RequiredArgsConstructor
@@ -28,7 +37,7 @@ public class ArticleController {
             @ApiResponse(responseCode = "409", description = "Article already exists")
     })
     public ResponseEntity<ArticleResponse> createArticle(@RequestBody ArticleRequest articleRequest) {
-        ArticleResponse response =  articleHandler.createArticle(articleRequest);
+        ArticleResponse response = articleHandler.createArticle(articleRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

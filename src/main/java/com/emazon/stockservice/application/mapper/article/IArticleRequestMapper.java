@@ -2,6 +2,7 @@ package com.emazon.stockservice.application.mapper.article;
 
 import com.emazon.stockservice.application.dto.article.ArticleRequest;
 import com.emazon.stockservice.domain.models.Article;
+import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.domain.models.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -25,7 +26,7 @@ public abstract class IArticleRequestMapper {
                 articleRequest.getQuantity(),
                 articleRequest.getPrice(),
                 categories,
-                articleRequest.getBrandId()
+                Brand.createWithId(articleRequest.getBrandId())
         );
     }
 }
