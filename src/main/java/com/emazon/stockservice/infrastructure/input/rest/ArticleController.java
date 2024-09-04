@@ -7,6 +7,16 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+
+import com.emazon.stockservice.infrastructure.output.jpa.repository.ArticleRepository;
+import com.emazon.stockservice.infrastructure.output.jpa.entities.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +37,8 @@ public class ArticleController {
             @ApiResponse(responseCode = "400", description = "Invalid input, object invalid"),
             @ApiResponse(responseCode = "409", description = "Article already exists")
     })
-    public ResponseEntity<ArticleResponse> createArticle(@RequestBody ArticleRequest articleRequest) {
-        ArticleResponse response =  articleHandler.createArticle(articleRequest);
+    public ResponseEntity<ArticleResponse> createArticle( @Valid @RequestBody ArticleRequest articleRequest) {
+        ArticleResponse response = articleHandler.createArticle(articleRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

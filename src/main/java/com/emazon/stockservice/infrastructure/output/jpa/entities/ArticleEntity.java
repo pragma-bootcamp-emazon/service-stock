@@ -37,8 +37,10 @@ public class ArticleEntity {
     private BigDecimal price;
 
 
-    @Column(nullable = false)
-    private Long brandId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "brand_id", nullable = false)
+    private BrandEntity brand;
+
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

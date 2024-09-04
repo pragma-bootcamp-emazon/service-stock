@@ -30,7 +30,7 @@ public class ArticleHandler implements IArticleHandler {
                 article.getQuantity(),
                 article.getPrice(),
                 articleRequest.getCategories(),
-                article.getBrandId()
+                article.getBrand()
                 );
         return articleResponseMapper.toArticleResponse(articleSaved);
     }

@@ -15,9 +15,17 @@ public class Brand {
     public Brand() {
     }
 
+    public Brand(Long id) {
+        this.id = id;
+    }
+
     public Brand(Long id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        validateName(name);
-        validateDescription(description);
+        if (name != null) {
+            validateName(name);
+        }
+        if (description != null) {
+            validateDescription(description);
+        }
         this.id = id;
         this.name = name;
         this.description = description;
@@ -25,10 +33,15 @@ public class Brand {
         this.updatedAt = updatedAt;
     }
 
+    public static Brand createWithId(Long id) {
+        return new Brand(id, null, null, null, null);
+    }
+
     public Brand(String name, String description) {
         this(null, name, description, null, null);
     }
 
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -65,7 +78,7 @@ public class Brand {
 
     private void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new DomainException(ErrorCode.CATEGORY_ALREADY_EXISTS);
+            throw new DomainException(ErrorCode.INVALID_BRAND_NAME);
         }
         if (name.length() > 50) {
             throw new DomainException(ErrorCode.INVALID_BRAND_NAME);

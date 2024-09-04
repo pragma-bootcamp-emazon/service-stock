@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ControllerAdvice
 public class ControllerAdvisor {
@@ -26,6 +23,7 @@ public class ControllerAdvisor {
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_CATEGORY_NAME, HttpStatus.BAD_REQUEST);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.CATEGORY_NOT_FOUND, HttpStatus.NOT_FOUND);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.BRAND_ALREADY_EXISTS, HttpStatus.CONFLICT);
+        ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_BRAND_DESCRIPTION, HttpStatus.BAD_REQUEST);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_BRAND_NAME, HttpStatus.BAD_REQUEST);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.BRAND_NOT_FOUND, HttpStatus.NOT_FOUND);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.ARTICLE_ALREADY_EXISTS, HttpStatus.CONFLICT);
@@ -33,6 +31,7 @@ public class ControllerAdvisor {
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_PRICE, HttpStatus.BAD_REQUEST);
         ERROR_CODE_STATUS_MAP.put(ErrorCode.INVALID_ARTICLE_CATEGORIES, HttpStatus.BAD_REQUEST);
     }
+
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<Map<String, Object>> handleDomainException(DomainException ex, WebRequest request) {
@@ -42,7 +41,7 @@ public class ControllerAdvisor {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", status.value());
         body.put("error", status.getReasonPhrase());
-        body.put("message_error", ex.getMessage());
+        body.put("message", ex.getMessage());
         body.put("path", request.getDescription(false).substring(4));
 
         return ResponseEntity.status(status).body(body);
@@ -51,25 +50,14 @@ public class ControllerAdvisor {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
 
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", "Bad Request");
-        body.put("message", "Validation failed");
+        body.put("status", status.value());
+        body.put("error", status.getReasonPhrase());
+        body.put("message", Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage());
         body.put("path", request.getDescription(false).substring(4));
 
-        List<Map<String, String>> errors = ex.getBindingResult().getFieldErrors().stream()
-                .map(fieldError -> {
-                    Map<String, String> errorDetails = new HashMap<>();
-                    errorDetails.put("field", fieldError.getField());
-                    errorDetails.put("message", fieldError.getDefaultMessage());
-                    return errorDetails;
-                })
-                .toList();
-
-        body.put("errors", errors);
-
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(body, status);
     }
-
 }
