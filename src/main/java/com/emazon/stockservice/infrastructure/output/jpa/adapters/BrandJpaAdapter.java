@@ -62,6 +62,13 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
     }
 
     @Override
+    public Brand findById(Long id) {
+        return brandRepository.findById(id)
+                .map(brandEntityMapper::toDomain)
+                .orElse(null);
+    }
+
+    @Override
     public long countTotalBrands() {
         return brandRepository.count();
     }

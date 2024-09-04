@@ -3,8 +3,10 @@ package com.emazon.stockservice.domain.usecases.article.create;
 import com.emazon.stockservice.domain.exceptions.DomainException;
 import com.emazon.stockservice.domain.exceptions.ErrorCode;
 import com.emazon.stockservice.domain.models.Article;
+import com.emazon.stockservice.domain.models.Brand;
 import com.emazon.stockservice.domain.models.Category;
 import com.emazon.stockservice.domain.spi.IArticlePersistencePort;
+import com.emazon.stockservice.domain.spi.IBrandPersistencePort;
 import com.emazon.stockservice.domain.spi.ICategoryPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,12 +29,15 @@ class CreateArticleUseCaseTest {
     @Mock
     private ICategoryPersistencePort categoryPersistencePort;
 
+    @Mock
+    private IBrandPersistencePort brandPersistencePort;
+
     private CreateArticleUseCase createArticleUseCase;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        createArticleUseCase = new CreateArticleUseCase(articlePersistencePort, categoryPersistencePort);
+        createArticleUseCase = new CreateArticleUseCase(articlePersistencePort, categoryPersistencePort, brandPersistencePort);
     }
 
     @Test
@@ -43,11 +48,14 @@ class CreateArticleUseCaseTest {
         BigDecimal price = new BigDecimal("19.99");
         List<Long> categoryIds = Arrays.asList(1L, 2L);
         List<Category> categories = Arrays.asList(new Category(1L), new Category(2L));
+        Brand brand = new Brand(1L);
 
+        when(brandPersistencePort.findById(1L)).thenReturn(brand);
         when(categoryPersistencePort.findByIds(categoryIds)).thenReturn(categories);
         when(articlePersistencePort.existsByName(name)).thenReturn(false);
 
-        createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, null);
+
+        createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, brand);
 
         verify(articlePersistencePort, times(1)).save(any(Article.class));
     }
@@ -60,11 +68,14 @@ class CreateArticleUseCaseTest {
         int quantity = 10;
         BigDecimal price = new BigDecimal("19.99");
         List<Long> categoryIds = Arrays.asList(1L, 2L);
+        Brand brand = new Brand(1L);
+
+        when(brandPersistencePort.findById(1L)).thenReturn(brand);
 
         when(categoryPersistencePort.findByIds(categoryIds)).thenReturn(Arrays.asList(new Category(1L)));
 
         DomainException exception = assertThrows(DomainException.class, () ->
-                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, null)
+                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, brand)
         );
 
         assertEquals(ErrorCode.CATEGORY_NOT_FOUND, exception.getErrorCode());
@@ -81,12 +92,15 @@ class CreateArticleUseCaseTest {
         BigDecimal price = new BigDecimal("19.99");
         List<Long> categoryIds = Arrays.asList(1L, 2L);
         List<Category> categories = Arrays.asList(new Category(1L), new Category(2L));
+        Brand brand = new Brand(1L);
+
+        when(brandPersistencePort.findById(1L)).thenReturn(brand);
 
         when(categoryPersistencePort.findByIds(categoryIds)).thenReturn(categories);
         when(articlePersistencePort.existsByName(name)).thenReturn(true);
 
         DomainException exception = assertThrows(DomainException.class, () ->
-                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, null)
+                createArticleUseCase.executeWithIds(name, description, quantity, price, categoryIds, brand)
         );
 
         assertEquals(ErrorCode.ARTICLE_ALREADY_EXISTS, exception.getErrorCode());

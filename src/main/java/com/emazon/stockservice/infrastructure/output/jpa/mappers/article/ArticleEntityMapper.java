@@ -26,9 +26,8 @@ public interface ArticleEntityMapper {
                 articleEntity.getDescription(),
                 articleEntity.getQuantity(),
                 articleEntity.getPrice(),
-                // Deja las categorías como están en tu implementación original
                 articleEntity.getCategories().stream().map(categoryEntity -> new Category(categoryEntity.getId(), categoryEntity.getName(), categoryEntity.getDescription(), categoryEntity.getCreatedAt(), categoryEntity.getUpdatedAt())).toList(),
-                articleEntity.getBrand() != null ? new Brand(articleEntity.getBrand().getName(), articleEntity.getDescription()) : null,
+                articleEntity.getBrand() != null ? new Brand(articleEntity.getBrand().getId()) : null,
                 articleEntity.getCreatedAt()
         );
     }

@@ -15,8 +15,11 @@ public class Brand {
     public Brand() {
     }
 
+    public Brand(Long id) {
+        this.id = id;
+    }
+
     public Brand(Long id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        // Solo validamos si los valores no son nulos
         if (name != null) {
             validateName(name);
         }

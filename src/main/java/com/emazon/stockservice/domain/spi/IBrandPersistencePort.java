@@ -10,4 +10,5 @@ public interface IBrandPersistencePort {
     PaginatedResult<Brand> getAllBrands(Pagination pagination, SortCriteria sortOrder);
     boolean existsByName(String name);
     long countTotalBrands();
+    Brand findById(Long id);
 }
