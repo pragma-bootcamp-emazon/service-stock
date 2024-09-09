@@ -41,7 +41,6 @@ public class Brand {
         this(null, name, description, null, null);
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
